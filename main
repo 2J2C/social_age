@@ -1,0 +1,18 @@
+import datetime
+
+birthday=input("생년월일을 입력하세요.(예시: 20210914):")
+birthday = datetime.datetime.strptime(birthday, "%Y%m%d")
+now = datetime.datetime.now()
+gender=input("군 복무 여부를 입력하세요. (예, 아니오):")
+
+if gender=="예":
+    military=input("군 복무기간을 입력하세요(예시: 2년 3개월 21일 복무했다면 2-3-21):")
+    mil_list=list(map(int, military.split("-")))
+    mil_day=int(round(mil_list[0]*365+mil_list[1]*30.5+mil_list[2]))
+    birthday=birthday + datetime.timedelta(days=mil_day)
+
+diffdays=(now-birthday).days
+
+ages=(diffdays//365)+round((diffdays%365)/365, 1)
+
+print(f'나이는 {ages}세 입니다.')
